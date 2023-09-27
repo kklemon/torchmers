@@ -80,4 +80,26 @@ Note that `KMerFrequencyEncoder` expects input sequences to be numericalized and
 
 #### Padding
 
+If sequences have been padded, a tensor with sequences lengths of shape `[batch_size]` can be passed as `seq_lens` argument to `KMerFrequencyEncoder.forward()`. Alternatively, a boolean mask of shape `[batch_size, seq_len]` is supported  as well, where tokens marked with `False` will not be considered for k-mer counting.
+
+Examples
+--------
+
+The `examples/` folder contains Jupyter notebooks with different usage examples.
+
+Benchmarks
+----------
+
+![torchmers performance benchmark](./figures/benchmark.png)
+
+**Note:** The "python native" implementation is certainly not highly optimized but should represent a simple Python baseline. The GPU benchmarks have been created on a RTX 4090.
+
+Contributing
+------------
+
+Contributions are welcomed. Please run tests with `python -m pytest tests/` to test your work before submitting.
+
+Future work
+-----------
+
 This project started out of frustration with slow on-the-fly computation of k-mer frequency spectra for deep learning applications when done in pure Python. I don't have very many other personal use cases, but I would be glad if users could provide me with their feature requests.
