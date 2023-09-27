@@ -32,6 +32,14 @@ Usage
 pip install torchmers
 ```
 
+The [bioseq](https://github.com/dnbaker/bioseq.git) package should additionally be installed from GitHub for tokenization support:
+
+```bash
+pip install git+https://github.com/dnbaker/bioseq.git
+```
+
+Since it didn't has been published on PyPI, it can't be included in the package's dependencies (prove me better if I'm wrong).
+
 ### Functional API
 
 The main k-mer counting logic of the package is implemented by the `count_k_mers` function. It expects sequences to be already tokenized, or rather _numericalized_ and to be provided as either NumPy or PyTorch arrays. To convert a biological sequence into this format, a `Tokenizer` can be used.
