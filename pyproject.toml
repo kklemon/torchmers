@@ -7,7 +7,6 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "~3.10"
-bioseq = {git = "https://github.com/dnbaker/bioseq.git"}
 numpy = "^1.26.0"
 torch = "^2.0.1"
 

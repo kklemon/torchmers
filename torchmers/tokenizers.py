@@ -1,4 +1,3 @@
-import bioseq
 import numpy as np
 
 
@@ -9,6 +8,14 @@ class Tokenizer:
 
     @classmethod
     def from_name(cls, name: str, **kwargs):
+        try:
+            import bioseq
+        except ImportError:
+            raise ImportError(
+                'The bioseq package has to be installed for tokenizer support. '
+                'Please install it with `pip install git+https://github.com/dnbaker/bioseq.git`.'
+            )
+        
         tokenizer_dict = bioseq.get_tokenizer_dict(
             False,  # include_bos
             False,  # include_eos
