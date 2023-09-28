@@ -17,11 +17,11 @@ Motivation
 
 K-mer frequency analysis is a simple yet highly important tool for genomics. Practitioners typically have to choose between two options: (1) implementations in scripting languages such as Python that are slow but flexible, or (2) tools in compiled languages that are efficient but might have limiting APIs.
 
-Why can't we get the best of both worlds? While PyTorch and similar frameworks have been developed specifically for deep learning applications, but after all they offer highly efficient implementations of numerical operations optimized for vector operations on CPUs and numerous hardware accelerators. With a bit of hacking, these primitive operations can be utilized for compute-intensive problems in genomics such as k-mer counting, which are typically not treated as numerical problems.
+Why can't we get the best of both worlds? While PyTorch and similar frameworks have been developed specifically for deep learning applications, after all, they offer highly efficient implementations of numerical operations optimized for vector operations on CPUs and numerous hardware accelerators. With a bit of hacking, these primitive operations can be utilized for compute-intensive problems in genomics such as k-mer counting, which are typically not treated as numerical problems.
 
 ### How does it work?
 
-`torchmers` is based on two primitive PyTorch operations: `unfold` and `scatter_add`. `unfold` extracts sliding local blocks from a tensor, similar to as found in a conv layer. Each value within a block is offset depending on its position and all values within a block are summed up to produce a distinct value for each possible k-mer. `scatter_add` is then simply used to add the k-mer indices to a count tensor. Some additional hacking is required for handling padding or varying sequence length, but this is a topic for another time.
+`torchmers` is based on two primitive PyTorch operations: `unfold` and `scatter_add`. With `unfold` sliding local blocks are extracted from a tensor, similar to a conv layer. Each value within a block is shifted depending on its position and all values within a block are summed to get a unique value for each possible k-mer. `scatter_add` is then used to simply add the k-mer indices to a count tensor. Some additional hacks are required to deal with padding or varying sequence lengths, but that's a topic for another time.
 
 Usage
 -----
@@ -57,7 +57,7 @@ counts = count_k_mers(tokens, k=5)
 
 #### GPU-support
 
-`torchmers` uses PyTorch primitives under the hood. As long as PyTorch implements the `unfold` and `scatter_add` operations, among others, for some hardware backend, it can in principle be used for accelerated k-mer counting. This includes, of course, Nvidia GPUs, TPUs and possibly also Apple M CPUs, although I don't have hardware to test this in the latter case.
+`torchmers` uses PyTorch primitives under the hood. As long as PyTorch implements `unfold` and `scatter_add` operations for a hardware backend, among others, it can in principle be used for accelerated k-mer counting. This includes, of course, Nvidia GPUs, TPUs, and possibly Apple M CPUs, although I don't have any hardware to test this in the latter case.
 
 The `count_k_mers` will simply use the device of the sequence tensor it has been provided, but this can also be overwritten with the `device` argument:
 
