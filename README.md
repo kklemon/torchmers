@@ -111,3 +111,7 @@ Future work
 -----------
 
 This project started out of frustration with slow on-the-fly computation of k-mer frequency spectra for deep learning applications when done in pure Python. I don't have very many other personal use cases, but I would be glad if users could provide me with their feature requests.
+
+**Update:**
+
+The intention to use PyTorch as computational backend originated in the idea to have a hardware and platform independent implementation of efficient numerical operations. JAX might possibly be a fit for this too. I thinking of either rewriting the library in JAX or provide implementations in multiple backends from which the user could choose.
